@@ -1,0 +1,131 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Bem-vindo ao monitor MariaDB. Os comandos terminam com ; ou \g.
+Seu ID de conexão MariaDB é 78
+Versão do servidor: 10.4.17-MariaDB distribuição binária mariadb.org
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab e outros.
+
+Digite 'ajuda;' ou '\h' para ajuda. Digite '\c' para limpar a instrução de entrada atual.
+
+MariaDB [(nenhum)]> mostra bancos de dados;
++--------------------+
+| Banco de dados |
++--------------------+
+| exemplo |
+| information_schema |
+| mysql |
+| performance_schema |
+| phpmyadmin |
+| teste |
++--------------------+
+6 linhas em conjunto (0,001 seg)
+
+MariaDB [(nenhum)]> use exemplo;
+Banco de dados alterado
+MariaDB [exemplo]> mostra tabelas;
++-------------------+
+| Tables_in_exemplo |
++-------------------+
+| produtos |
++-------------------+
+1 linha em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione * dos produtos;
++----+----------+-------+------+
+| identificação | nome | valor | qtde |
++----+----------+-------+------+
+| 1 | Lápis | 1,00 | 10 |
+| 2 | Borracha | 3,00 | 10 |
+| 3 | Caderno | 15h00 | 10 |
++----+----------+-------+------+
+3 linhas em conjunto (0,001 seg)
+
+MariaDB [exemplo]>selecione avg(VALOR) de produtos;
++------------+
+| avg(VALOR) |
++------------+
+| 6.333333 |
++------------+
+1 linha em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione * dos produtos;
++----+----------+-------+------+
+| identificação | nome | valor | qtde |
++----+----------+-------+------+
+| 1 | Lápis | 1,00 | 10 |
+| 2 | Borracha | 3,00 | 10 |
+| 3 | Caderno | 15h00 | 10 |
++----+----------+-------+------+
+3 linhas em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione max(valor) de produtos;
++------------+
+| max(valor) |
++------------+
+| 15h00 |
++------------+
+1 linha em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione where(valor) dos produtos;
+ERRO 1064 (42000): Você tem um erro em sua sintaxe SQL; verifique o manual que corresponde à versão do seu servidor MariaDB para a sintaxe correta para usar perto de 'where(valor) from produtos' na linha 1
+MariaDB [exemplo]> selecione * dos produtos
+    -> onde valor = 15;
++----+---------+-------+------+
+| identificação | nome | valor | qtde |
++----+---------+-------+------+
+| 3 | Caderno | 15h00 | 10 |
++----+---------+-------+------+
+1 linha em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione * dos produtos
+    -> onde valor = (
+    -> selecione max(valor) de produtos);
++----+---------+-------+------+
+| identificação | nome | valor | qtde |
++----+---------+-------+------+
+| 3 | Caderno | 15h00 | 10 |
++----+---------+-------+------+
+1 linha em conjunto (0,002 seg)
+
+MariaDB [exemplo]> selecione (valor * qtde) como total de produtos;
++--------+
+| total |
++--------+
+| 10h00 |
+| 30,00 |
+| 150,00 |
++--------+
+3 linhas em conjunto (0,000 seg)
+
+MariaDB [exemplo] selecione soma(valor * qtde) como total de produtos;
++--------+
+| total |
++--------+
+| 190,00 |
++--------+
+1 linha em conjunto (0,001 seg)
+
+MariaDB [exemplo]> selecione * dos produtos
+    -> onde valor in(3,15);
++----+----------+-------+------+
+| identificação | nome | valor | qtde |
++----+----------+-------+------+
+| 2 | Borracha | 3,00 | 10 |
+| 3 | Caderno | 15h00 | 10 |
++----+----------+-------+------+
+2 linhas em conjunto (0,000 seg)
+
+MariaDB [exemplo]> selecione * dos produtos
+    -> onde valor entre 1 e 10;
++----+----------+-------+------+
+| identificação | nome | valor | qtde |
++----+----------+-------+------+
+| 1 | Lápis | 1,00 | 10 |
+| 2 | Borracha | 3,00 | 10 |
++----+----------+-------+------+
+2 linhas em conjunto (0,001 seg)
